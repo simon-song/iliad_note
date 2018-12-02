@@ -1,0 +1,11 @@
+/text/*.aux
+/*.aux
+/*.bak
+/*.idx
+/*.ilg
+/*.ind
+/*.log
+/*.out
+/*.toc
+/iliad_note.pdf
+/backup/*

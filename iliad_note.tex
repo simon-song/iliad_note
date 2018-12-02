@@ -1,0 +1,127 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  To retrieve only the text of Iliad (without notes) do the following:
+%%    $ gawk ᾽{if (match($1,"\\Large")!=0 {print}}᾽ iliad_note.tex
+%%
+%%  gawk does not like \[ in the regular expression.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper,14pt]{memoir}
+%\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Linux Libertine O}
+%\setmainfont[Mapping=Tex-text]{Gentium} % good 
+%\setmainfont[Mapping=Tex-text]{TeXGyrePagella} % not good
+%\setmainfont[Mapping=Tex-text]{GFS Porson} % good
+%\setmainfont[Mapping=Tex-text]{FreeMono} % works but not very pretty
+
+%\chapterstyle{article}
+
+%\newfontfamily\gentium{Gentium}  % Greek and English
+%\newfontfamily\g{GFS Porson}  % Greek only
+\newfontfamily\g{GFSPorson.ttf}
+%\newfontfamily\g{Linux Libertine O}
+%\newfontfamily\neohellenic{GFS Neohellenic} % Greek only
+
+\usepackage[plainpages=false;pdfpagelabels,bookmarksnumbered]{hyperref}
+
+\usepackage{setspace}
+%\linespread{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\settrimmedsize{11in}{210mm}{*}
+%\setlength{\trimtop}{0pt}
+%\setlength{\trimedge}{\stockwidth}
+%\addtolength{\trimedge}{-\paperwidth}
+%\settypeblocksize{8.75in}{33pc}{*}
+%\setulmargins{3.6cm}{*}{*}  % smaller value makes header higher
+%%\setlrmargins{0.5in}{*}{0.5}
+%%\setulmarginsandblock{1.0in}{*}{1.0}
+%\setlrmarginsandblock{1.2in}{*}{1.5}
+%\setmarginnotes{0pt}{0pt}{\onelineskip}  % changed by Pengcheng, no margin
+%%\setheadfoot{\onelineskip}{2\onelineskip}
+%\setheadfoot{\onelineskip}{\onelineskip}
+%%\setheaderspaces{*}{2\onelineskip}{*}
+%\setheaderspaces{*}{\onelineskip}{*} % changed by Pengcheng
+%\addtolength{\textwidth}{15pt}     %  increase text width
+%\addtolength{\foremargin}{-15pt}
+%\checkandfixthelayout
+
+%% see The Memoir Class User Guide,  p.8
+\addtolength{\textheight}{1.5cm}  % increase text height
+\setulmargins{3.6cm}{*}{*}  % smaller value makes header higher
+\setlength{\topmargin}{0pt}
+\setlength{\footskip}{0pt}
+\checkandfixthelayout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{verse}
+\linenumberfrequency{5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Set \vin which is a short hand of \hspace{\vgap}, default value
+%%  of \vgap is 1.5em
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\vgap}{1em}
+\setlength{\vrightskip}{-2em} % distance of line number from right margin
+
+% page style of Oxford Classical Texts 
+\makepagestyle{ocd}
+  \makeevenhead{ocd}{\thepage}{\rightmark}{}
+  \makeoddhead{ocd}{}{\rightmark}{\thepage}  
+  \makeevenfoot{ocd}{}{}{}
+  \makeoddfoot{ocd}{}{}{}
+
+% set \leftmark to part name and \rightmark to chapter name	
+\makepsmarks{ocd}{%
+  \nouppercaseheads
+  \createmark{part}{left}{nonumber}{}{. \space}
+  \createmark{chapter}{right}{nonumber}{}{}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{makeidx}
+\makeindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+\pagestyle{empty}
+\begin{center}
+  \vspace{1.5in} 
+  \HUGE{Notes on ΙΛΙΑΔΟΣ} \par \vspace{3in}
+  \HUGE{Pengcheng Song} 
+\end{center}
+
+\cleardoublepage
+\pagenumbering{roman}
+\pagestyle{headings}
+
+\tableofcontents*
+
+%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\pagestyle{ocd}
+\include{book01text}  % text
+\include{book01}   % note
+\include{vocab}
+
+%%%%%%%%%%%%%%%%%%%%
+\backmatter
+%\printindex
+
+% \cleardoublepage
+% \pagestyle{empty}
+% \null\vfil
+% \begin{figure}
+% %\centering
+% \includegraphics[width=1.1\textwidth]{luw1.pdf}
+% \end{figure}
+% \begin{figure}
+% %\centering
+% \includegraphics[width=1.1\textwidth]{luw2.pdf}
+% \end{figure}
+% \vfil	
+
+
+\end{document}
